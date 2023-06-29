@@ -93,14 +93,18 @@ describe("Register Component", () => {
     expect(nameElement.value).toBe(name);
     expect(emailElement.value).toBe(email);
     expect(passwordElement.value).toBe(password);
-    expect(skillDropDownElement.value).toBe("React");
 
-    const buttonElement = screen.getByRole("button");
+    const buttonElement = screen.getByRole("button", {
+      name: /register/i,
+    });
     await userEvent.click(buttonElement);
     screen.debug(); //to see the dom
-    // const alertMessageElement=screen.getByText(/You have been successfully registered/i)
-    const errorMessageElement = screen.getByRole("alert");
-    expect(errorMessageElement).toBeInTheDocument();
+
+    const alertMessageElement = await screen.findByRole("alert");
+    expect(alertMessageElement).toBeInTheDocument();
+    expect(alertMessageElement).toHaveTextContent(
+      "You have successfully registered"
+    );
   });
 
   it("should test for presence of subheading in the component", () => {

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Register from "./Register.jsx";
+import Register from "../component/register/Register.jsx";
 import userEvent from "@testing-library/user-event";
 
 describe("Register Component", () => {
